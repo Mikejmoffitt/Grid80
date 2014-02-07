@@ -12,4 +12,7 @@ void g80_draw_times();
 // Puts the days on the top
 void g80_draw_days();
 
+// Render an event.
+void g80_draw_event(char* name,char* place,char* days,int start,int end);
+
 #endif

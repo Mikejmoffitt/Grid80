@@ -37,3 +37,8 @@ void g80_draw_days()
 		}
 	}
 }
+
+void g80_draw_event(char* name, char* place, char* days, int start, int end)
+{
+	
+}

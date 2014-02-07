@@ -36,9 +36,42 @@ overlapping events will be rendered over each other. That's up to you.
 
 #include "main.h"
 
+int g80_time_lookup(char* timestring)
+{
+	// Lookup table matching times of day to positions on the map
+	const int timetable[] = {4,5, // 8:00,8:30
+	7,8,
+	10,11,
+	13,14,
+	16,17,
+	19,20, // 13:00
+	22,23,
+	25,26,
+	28,29,
+	31,32,
+	34,35,
+	37,38,
+	40,41};
+	
+	
+	int retval = 4;
+	char hr[2];
+	for (unsigned int i = 0; i < (unsigned)strlen(timestring); i++)
+	{
+		if (timestring[i] == ':')
+		{
+			retval += ((timestring[i+1]=='3')?1:0);
+			break;
+		}
+		hr[i] = timestring[i];
+	}
+	return retval + (((atoi(hr)-8) * 3));;
+}
+
 int main(int argc, char **argv)
 {
 	g80_init_map();
+	int test = g80_time_lookup("9:30");
 	g80_draw_rect(0,0,GRID80_MAP_W-2,GRID80_MAP_H-2,'.');
 	g80_draw_times();
 	g80_draw_days();

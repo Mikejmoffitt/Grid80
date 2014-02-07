@@ -10,8 +10,11 @@
 #define GRID80_MAP_W 80 // Char map width (width of screen)
 #define GRID80_MAP_H 43 // Char map height
 
-char** g80_map;
 
+
+
+
+char** g80_map;
 
 // Puts a rectangle at given coords (char coords)
 void g80_draw_rect(int x, int y, int w, int h, char fill);

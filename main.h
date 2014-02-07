@@ -5,6 +5,7 @@
 #include "grid80_map.h"
 #include "grid80_put.h"
 
+int g80_time_lookup(char* timestring);
 int main(int argc, char **argv);
 
 #endif
