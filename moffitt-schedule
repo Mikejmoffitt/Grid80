@@ -1,0 +1,51 @@
+// For each event, put a block like so:
+ 
+// EV [13-char name]
+// IN [13-char second line]
+// ON [MTWHF]
+// TS [24-hour time]
+// TE [24-hour time]
+// OK
+
+
+EV  CPET-241-01
+IN Gleason 3139
+ON MWF
+TS 10:00
+TE 11:00
+OK
+
+EV  EEET-121-01
+IN  Orange 1355
+ON MWF
+TS 12:00
+TE 13:00
+OK
+
+EV  MATH-211-01
+IN Gosnell 2365
+ON MWF
+TS 13:00
+TE 14:00
+OK
+
+EV  MJLP-202-07
+IN Business 3225
+ON MTWH
+TS 16:00
+TE 17:00
+OK
+
+EV  EEET-122-01
+IN   ENT 3125
+ON T
+TS 11:00
+TE 13:00
+OK
+
+EV  CPET-242-01
+IN Golisano 1360
+ON W
+TS 14:00
+TE 16:00
+OK

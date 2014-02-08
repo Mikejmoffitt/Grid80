@@ -87,21 +87,21 @@ void g80_draw_event(char* name, char* place, char* days, int start, int end)
 		for (unsigned int i = 0; i < (unsigned)strlen(days); i++)
 		{
 			int target = 9;
-			switch (days[i])
+			switch (days[i]|0x20)
 			{
-				case 'M':
+				case 'm':
 					target = 9;
 					break;
-				case 'T':
+				case 't':
 					target = 9+GRID80_CELL_W+1;
 					break;
-				case 'W':
+				case 'w':
 					target = 9+(2*(1+GRID80_CELL_W));
 					break;
-				case 'H':
+				case 'h':
 					target = 9+(3*(1+GRID80_CELL_W));
 					break;
-				case 'F':
+				case 'f':
 					target = 9+(4*(1+GRID80_CELL_W));
 					break;
 			}

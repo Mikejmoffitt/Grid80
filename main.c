@@ -1,45 +1,9 @@
-/*
-
-Grid80
-Michael Moffitt 2014
-mikejmoffitt.com
-
-
-Grid80 is a simple program that renders a 5-day schedule to an 80-column text
-file. This is to facilitate printing of such a schedule on an old Dot Matrix
-Printer. It could also be used to render a schedule into a standard terminal
-session as well, I suppose. 
-
-Format for the schedule file to feed it is as follows:
-
-For a line to be printed on the top, put:
-
-HT [Header text, maximum 80 characters]
-
-  For each event, put a block like so:
-  
-EV [13-char name]
-IN [13-char second line]
-ON [MTWHF]
-TS [24-hour time]
-TE [24-hour time]
-OK
-
-For a line at the bottom, put:
-
-FT [Footer text, maximum 80 characters]
-
-Add as many of these as you want. It will not check for schedule conflicts, and
-overlapping events will be rendered over each other. That's up to you.
-
-*/
-
 #include "main.h"
 
 int g80_time_lookup(char* timestring)
 {	
 	int retval = 3;
-	char hr[2];
+	char hr[] = "  ";
 	for (unsigned int i = 0; i < (unsigned)strlen(timestring); i++)
 	{
 		if (timestring[i] == ':')
@@ -52,19 +16,95 @@ int g80_time_lookup(char* timestring)
 	return retval + (((atoi(hr)-8) * 3));;
 }
 
+void g80_load_events(FILE* fptr)
+{
+	// Line buffer
+	char line[83];
+	char ev[14];
+	char in[14];
+	char on[] = "     ";
+	char ts[] = "     ";
+	char te[] = "     ";
+	// Clear out vars
+	while (fgets(line, sizeof(line), fptr))
+	{
+		if (strlen(line) > 1)
+		{
+			// Remove any unacceptable characters
+			for (unsigned int i = 0; i < (unsigned)strlen(line); i++)
+			{
+				if (line[i] < ' ')
+				{
+					line[i] = '\0';
+				}
+			}
+			if ((line[0]|0x20) == 'e' && (line[1]|0x20) == 'v')
+			{
+				// Make event name
+				strncpy(ev,line+3,13);
+			}
+			else if ((line[0]|0x20) == 'i' && (line[1]|0x20) == 'n')
+			{
+				// Make event name
+				strncpy(in,line+3,13);
+			}
+			else if ((line[0]|0x20) == 'o' && (line[1]|0x20) == 'n')
+			{
+				// Make event name
+				strncpy(on,line+3,5);
+			}
+			else if ((line[0]|0x20) == 't')
+			{
+				if ((line[1]|0x20) == 's')
+				{
+					// Make event name
+					strncpy(ts,line+3,5);
+				}
+				else if ((line[1]|0x20) == 'e')
+				{
+					// Make event name
+					strncpy(te,line+3,5);
+				}
+			}
+			else if ((line[0]|0x20) == 'o' && (line[1]|0x20) == 'k')
+			{
+				g80_draw_event(ev,in,on,g80_time_lookup(ts),g80_time_lookup(te));
+				
+			}
+		}
+	}
+}
+
 int main(int argc, char **argv)
 {
+	if (argc != 2 && argc != 3)
+	{
+		printf("Usage: %s infile [fillchar]\n",argv[0]);
+		return 0;
+	}
 	g80_init_map();
-	
 	// Put the border there
-	g80_draw_rect(0,0,GRID80_MAP_W-2,GRID80_MAP_H-2,'.');
+	if (argc == 3)
+	{
+		g80_draw_rect(0,0,GRID80_MAP_W-2,GRID80_MAP_H-2,argv[2][0]);
+	}
+	else
+	{
+		g80_draw_rect(0,0,GRID80_MAP_W-2,GRID80_MAP_H-2,' ');
+	}
+
+	FILE* fptr;
+	char *mode = "r";
+	fptr = fopen(argv[1], mode);
 	
-	// Print a test event
-	g80_draw_event("Doing squats!","Everywhere!","MWF",g80_time_lookup("8:00"),g80_time_lookup("10:00"));
-	g80_draw_event("Programming C"," In a hole ","MW",g80_time_lookup("11:00"),g80_time_lookup("12:30"));
-	g80_draw_event("Meeting girls"," Elsewhere ","TH",g80_time_lookup("10:30"),g80_time_lookup("14:00"));
-	
-	// Get boilerplate stuff in there
+	if (fptr == NULL)
+	{
+		fprintf(stderr, "Grid80: Couldn't open \"%s\".\n",argv[1]);
+		g80_free_map();
+		return 0;
+	}
+	g80_load_events(fptr);
+	fclose(fptr);
 	g80_draw_times();
 	g80_draw_days();
 	g80_print_map();
