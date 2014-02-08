@@ -1,7 +1,7 @@
-Grid80
 Michael Moffitt 2014
 ======
-
+By Michael Moffitt 2014
+http://mikejmoffitt.com
 Grid80 is licensed under the MIT license blah blah blah
 
 Grid80 renders a 5-day schedule in an 80-column text view. This is to faciliate
