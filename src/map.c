@@ -1,4 +1,7 @@
-#include "grid80_map.h"
+#include <stdlib.h>
+#include <string.h>
+
+#include <map.h>
 
 // Puts a rectangle at given coords (char coords)
 void g80_draw_rect(int x, int y, int w, int h, char fill)

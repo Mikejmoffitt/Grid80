@@ -1,18 +1,10 @@
 #ifndef GRID80_MAP
 #define GRID80_MAP
-#include "main.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 #define GRID80_CELL_W 13 // Characters per line of a cell
 #define GRID80_CELL_H 2 // Lines in a cell
 #define GRID80_MAP_W 80 // Char map width (width of screen)
 #define GRID80_MAP_H 43 // Char map height
-
-
-
-
 
 char** g80_map;
 

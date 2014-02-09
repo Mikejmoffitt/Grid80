@@ -1,4 +1,10 @@
-#include "main.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+#include <put.h>
+#include <print.h>
+#include <map.h>
 
 int g80_time_lookup(char* timestring)
 {	
