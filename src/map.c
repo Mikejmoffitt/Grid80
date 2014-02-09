@@ -45,7 +45,7 @@ void g80_draw_string(int x, int y, char* string)
 {
 	x++;
 	y++;
-	unsigned int length = (unsigned)strlen(string);
+	size_t length = strlen(string);
 	for (unsigned int i = 0; i < length && i < 13; i++)
 	{
 		if (y >= 0 && y < GRID80_MAP_H && x >= 0 && x < GRID80_MAP_W)
