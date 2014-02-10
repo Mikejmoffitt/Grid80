@@ -9,9 +9,9 @@ void g80_draw_rect(unsigned int x, unsigned int y, unsigned int w, unsigned int 
 	w++;
 	h++;
 	// Clear out the area
-	for(unsigned int ypos = y+1; ypos < y+h; ypos++)
+	for(unsigned int ypos = y + 1; ypos < y + h; ypos++)
 	{
-		for(unsigned int xpos = x+1; xpos < x+w; xpos++)
+		for(unsigned int xpos = x + 1; xpos < x + w; xpos++)
 		{
 			if(ypos < GRID80_MAP_H && xpos < GRID80_MAP_W)
 			{
@@ -20,36 +20,36 @@ void g80_draw_rect(unsigned int x, unsigned int y, unsigned int w, unsigned int 
 		}
 	}
 	// Vertical sides
-	for(unsigned int ypos = y+1; ypos < y+h+1; ypos++)
+	for(unsigned int ypos = y + 1; ypos < y +h + 1; ypos++)
 	{
 		if (ypos < GRID80_MAP_H)
 		{
 			g80_map[ypos][x] = '|';
-			g80_map[ypos][x+w] = '|';
+			g80_map[ypos][x + w] = '|';
 		}
 	}
 	// Horizontal sides
-	for(unsigned int xpos = (x+1); xpos < x+w; xpos++)
+	for(unsigned int xpos = x + 1; xpos < x + w; xpos++)
 	{
 		if(xpos < GRID80_MAP_W)
 		{
 			g80_map[y][xpos] = '_';
-			g80_map[y+h][xpos] = '_';
+			g80_map[y + h][xpos] = '_';
 		}
 	}
 }
 
 // Puts a string at given coords (char coords)
-void g80_draw_string(unsigned int x, unsigned int y, char* string)
+void g80_draw_string(unsigned int x, unsigned int y, char *string)
 {
 	x++;
 	y++;
-	size_t length = strlen(string);
-	for(unsigned int i = 0; i < length && i < 13; i++)
+	size_t length = strnlen(string, GRID80_MAP_W);
+	for(unsigned int i = 0; i < length && i < GRID80_CELL_W; i++)
 	{
 		if(y < GRID80_MAP_H && x < GRID80_MAP_W)
 		{
-			g80_map[y][x+i] = string[i];
+			g80_map[y][x + i] = string[i];
 		}
 	}
 }
@@ -57,10 +57,10 @@ void g80_draw_string(unsigned int x, unsigned int y, char* string)
 // Initialize the map array
 void g80_init_map()
 {
-	g80_map = (char**)malloc(GRID80_MAP_H * sizeof(char*));
+	g80_map = (char **)malloc(GRID80_MAP_H * sizeof(char *));
 	for(unsigned int y = 0; y < GRID80_MAP_H; y++)
 	{
-		g80_map[y] = (char*)malloc(GRID80_MAP_W * sizeof(char));
+		g80_map[y] = (char *)malloc(GRID80_MAP_W * sizeof(char));
 		for(int x = 0; x < GRID80_MAP_W; x++)
 		{
 			g80_map[y][x] = ' ';
