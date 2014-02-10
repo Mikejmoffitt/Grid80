@@ -13,8 +13,7 @@ void g80_draw_rect(unsigned int x, unsigned int y, unsigned int w, unsigned int 
 	{
 		for(unsigned int xpos = x+1; xpos < x+w; xpos++)
 		{
-			if(ypos < GRID80_MAP_H && xpos < GRID80_MAP_W &&
-				xpos >= 0 && ypos >= 0)
+			if(ypos < GRID80_MAP_H && xpos < GRID80_MAP_W)
 			{
 				g80_map[ypos][xpos] = fill;
 			}
@@ -23,7 +22,7 @@ void g80_draw_rect(unsigned int x, unsigned int y, unsigned int w, unsigned int 
 	// Vertical sides
 	for(unsigned int ypos = y+1; ypos < y+h+1; ypos++)
 	{
-		if (ypos < GRID80_MAP_H && ypos >= 0)
+		if (ypos < GRID80_MAP_H)
 		{
 			g80_map[ypos][x] = '|';
 			g80_map[ypos][x+w] = '|';
@@ -32,7 +31,7 @@ void g80_draw_rect(unsigned int x, unsigned int y, unsigned int w, unsigned int 
 	// Horizontal sides
 	for(unsigned int xpos = (x+1); xpos < x+w; xpos++)
 	{
-		if(xpos < GRID80_MAP_W && xpos >= 0)
+		if(xpos < GRID80_MAP_W)
 		{
 			g80_map[y][xpos] = '_';
 			g80_map[y+h][xpos] = '_';
@@ -48,7 +47,7 @@ void g80_draw_string(unsigned int x, unsigned int y, char* string)
 	size_t length = strlen(string);
 	for(unsigned int i = 0; i < length && i < 13; i++)
 	{
-		if(y >= 0 && y < GRID80_MAP_H && x >= 0 && x < GRID80_MAP_W)
+		if(y < GRID80_MAP_H && x < GRID80_MAP_W)
 		{
 			g80_map[y][x+i] = string[i];
 		}
