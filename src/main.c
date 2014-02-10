@@ -1,4 +1,10 @@
-#include "main.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+#include <put.h>
+#include <print.h>
+#include <map.h>
 
 int g80_time_lookup(char* timestring)
 {	
@@ -19,9 +25,9 @@ int g80_time_lookup(char* timestring)
 void g80_load_events(FILE* fptr)
 {
 	// Line buffer
-	char line[83];
-	char ev[14];
-	char in[14];
+	char line[83] = {0};
+	char ev[14] = {0};
+	char in[14] = {0};
 	char on[] = "     ";
 	char ts[] = "     ";
 	char te[] = "     ";

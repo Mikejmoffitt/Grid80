@@ -1,4 +1,7 @@
-#include "grid80_print.h"
+#include <stdio.h>
+
+#include <map.h>
+#include <print.h>
 
 void g80_print_top()
 {

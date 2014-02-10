@@ -1,4 +1,7 @@
-#include "grid80_put.h"
+#include <string.h>
+
+#include <map.h>
+#include <put.h>
 
 void g80_draw_times()
 {
