@@ -6,16 +6,14 @@
 #define GRID80_MAP_W 80 // Char map width (width of screen)
 #define GRID80_MAP_H 43 // Char map height
 
+// Global map state:
 char** g80_map;
 
 // Puts a rectangle at given coords (char coords)
-void g80_draw_rect(int x, int y, int w, int h, char fill);
+void g80_draw_rect(unsigned int x, unsigned int y, unsigned int w, unsigned int h, char fill);
 
 // Puts a string at given coords (char coords)
-void g80_draw_string(int x, int y, char* string);
-
-// Puts the times on the left side
-void g80_draw_times();
+void g80_draw_string(unsigned int x, unsigned int y, char* string);
 
 // Initialize the map array
 void g80_init_map();
