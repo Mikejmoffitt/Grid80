@@ -7,6 +7,26 @@
 // TE [24-hour time]
 // OK
 
+// Remote work
+
+EV      Hudl
+IN  Remote Work
+ON TWH
+TS 9:00
+TE 12:00
+OK
+
+EV      Hudl
+IN  Remote Work
+ON F
+TS 10:00
+TE 12:00
+OK
+
+
+
+// Classes
+
 EV  EEET 212-01
 IN   ENT 3145
 ON M
@@ -44,7 +64,7 @@ OK
 
 EV  CPET 342-03
 IN   GOL 1360
-ON H
+ON F
 TS 8:00
 TE 10:00
 OK
